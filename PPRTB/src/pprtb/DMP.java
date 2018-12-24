@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DMP {
+	public static int userNum = 10;
 	public HashMap<String, ArrayList<BigPair>> table = new HashMap<String, ArrayList<BigPair>>();
 	public ArrayList<BigPair> getProfile(String tag) {
 		String str = tag.toString();

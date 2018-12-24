@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class DSP {
-	public static int adNum = 1000; 
+	public static int adNum = 10; 
 	public static int bidFunBound = 100; 
 	public ArrayList<ArrayList<Integer>> bidFuns;
 	Encryption enctool;

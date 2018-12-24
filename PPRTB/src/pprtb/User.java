@@ -15,8 +15,9 @@ public class User {
 	ArrayList<Integer> profile;
 	public ArrayList<BigPair> cProfile;
 	public Encryption encTool;
-	public BigInteger sk;
+	private BigInteger sk;
 	public BigInteger pk;
+	private BigInteger s; 
 	
 
 	public User(String id, ArrayList<Integer> profile, Encryption encTool) throws IOException, ClassNotFoundException {
@@ -25,6 +26,7 @@ public class User {
 		this.encTool = encTool;
 		sk = encTool.genSK();
 		pk = encTool.g.modPow(sk, encTool.p);
+		s = new BigInteger(Encryption.keyLength, new Random());
 		cProfile = new ArrayList<BigPair>();
 		for (int i = 0; i < n; i++) {
 			cProfile.add(encTool.enc(pk, profile.get(i)));
@@ -49,12 +51,21 @@ public class User {
 	
 	public ArrayList<BigPair> reEnc(ArrayList<BigPair> saltedBids, BigInteger pk2) {
 		ArrayList<BigPair> results = new ArrayList<BigPair>();
-		BigInteger r = new BigInteger(Encryption.keyLength, new Random());
+		//BigInteger r = new BigInteger(Encryption.keyLength, new Random());
+		//s = s.multiply(r).mod(encTool.p);
 		for (int i = 0; i < DSP.adNum; i++) {
 			BigPair saltedBid = saltedBids.get(i);
-			BigPair re = encTool.reEnc(sk, pk2, saltedBid, r);
+			BigPair re = encTool.reEnc(sk, pk2, saltedBid, s);
 			results.add(re);
 		}
 		return results;
 	}
+	public BigPair deRndEnc(BigPair c, int cnt) {
+		BigInteger sc = s.modPow(BigInteger.valueOf(cnt), encTool.p);
+		BigInteger scn = sc.modInverse(encTool.p);
+		c.a = c.a.multiply(scn).mod(encTool.p);
+		return c;
+		
+	}
+	
 }

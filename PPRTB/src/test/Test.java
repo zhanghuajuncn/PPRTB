@@ -18,7 +18,7 @@ public class Test {
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("TestUser starts.");
+		System.out.println("TestUser1 starts.");
 		
 		//Create two users. Push their encrypted profiles into DMP.
 		Encryption encTool = new Encryption("g.para");
@@ -58,14 +58,15 @@ public class Test {
 		System.out.println("DSP caculates the bids.");
 		DSP dsp = new DSP(encTool);
 		ArrayList<BigPair> bids = dsp.bid(cProfile);
-		
+		/*
 		for (int i = 0; i < DSP.adNum; i++) {
 			ArrayList<Integer> bidFun = dsp.bidFuns.get(i);
 			int bid = user1.computeBid(bidFun);
-			//System.out.println("Bid" + i + " caculated by User1:" + bid);
+			System.out.println("Bid" + i + " caculated by User1:" + bid);
 		}
 		int bid0D = encTool.dec(user1.sk, bids.get(0));
 		System.out.println("Decrypted Bid0:" + bid0D);
+		*/
 		System.out.println("AdExchanger adds salt to bids.");
 		ArrayList<BigPair> saltedBids = ade.salt(bids);
 		System.out.println("User1 re-encrypts the bids.");
@@ -73,6 +74,6 @@ public class Test {
 		System.out.println("AdExchanger caculates the best bid.");
 		int best = ade.compare(reBids);
 		System.out.println("AdExchanger says the best bid is bid" + best);
+		
 	}
-
 }

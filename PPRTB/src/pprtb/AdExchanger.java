@@ -14,6 +14,8 @@ public class AdExchanger {
 	Encryption encTool;
 	private BigInteger sk;
 	public BigInteger pk;
+	//public ArrayList<ArrayList<BigPair>> fare;
+	//public ArrayList<ArrayList<Integer>> rndCnt;
 	
 	public AdExchanger(Encryption encTool) throws FileNotFoundException, ClassNotFoundException, IOException {
 		this.encTool = encTool;
@@ -57,6 +59,11 @@ public class AdExchanger {
 				max = bid;
 			}
 		}
+		return result;
+	}
+
+	public int dec(BigPair c) {
+		int result = encTool.dec(sk, c);
 		return result;
 	}
 }

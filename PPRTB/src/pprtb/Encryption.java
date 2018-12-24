@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class Encryption {
 	static int keyLength = 1024;
-	static int messageRange = 10000;
+	static int messageRange = 100000;
 	public BigInteger p;
 	public BigInteger g;
 	public HashMap<BigInteger, Integer> decMap = new HashMap<BigInteger, Integer>();
@@ -81,7 +81,7 @@ public class Encryption {
 		BigInteger gm = c.b.multiply(pkrn).mod(p);
 		Integer m = decMap.get(gm);
 		if (m == null) 
-			return 99999;
+			return -999999;
 		return m;
 	}
 	
