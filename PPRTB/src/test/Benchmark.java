@@ -6,6 +6,7 @@ package test;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Random;
 
 import pprtb.AdExchanger;
@@ -44,11 +45,12 @@ public class Benchmark {
 		}
 		
 		//create triggers
-		for (int k = 0; k < 100; k++) {
+//		for (int k = 0; k < 100; k++) {
 
 		Publisher pub = new Publisher(encTool);
-		System.out.println(k);
-		for (int i = 0; i < 50; i++) {
+//		System.out.println(k);
+		long time = (new Date()).getTime();
+		for (int i = 0; i < 100; i++) {
 			Random rnd = new Random();
 			int userIndex = rnd.nextInt(DMP.userNum);
 			User user = users.get(userIndex);
@@ -63,6 +65,9 @@ public class Benchmark {
 			//System.out.println("Bid " + best);
 			pub.countFare(best, userIndex, reBids.get(best));
 		}
+		System.out.println((new Date()).getTime()-time);
+		time = (new Date()).getTime();
+		for (int k = 0; k < 100; k++)
 		for (int i = 0; i < DSP.adNum; i++) {
 			int charge = 0;
 			for (int j = 0;j < DMP.userNum; j++) {
@@ -74,7 +79,8 @@ public class Benchmark {
 					charge += t;
 				}
 			}
-			System.out.println("Ad " + i +" should pay: " + charge);
+			//System.out.println("Ad " + i +" should pay: " + charge);
 		}
-	}}
+		System.out.println((new Date()).getTime()-time);
+	}//}
 }

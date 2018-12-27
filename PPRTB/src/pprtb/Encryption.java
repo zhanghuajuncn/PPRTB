@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class Encryption {
-	static int keyLength = 1024;
+	static int keyLength = 512;
 	static int messageRange = 100000;
 	public BigInteger p;
 	public BigInteger g;

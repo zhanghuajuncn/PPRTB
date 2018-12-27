@@ -7,6 +7,7 @@ package test;
 
 import java.io.IOException;
 import java.math.BigInteger;
+import java.util.Date;
 
 import pprtb.BigPair;
 import pprtb.Encryption;
@@ -15,7 +16,9 @@ public class TestEnc {
 
 	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
+		long time = (new Date()).getTime();
 		Encryption test = new Encryption("g.para");
+		System.out.println((new Date()).getTime()-time);
 		System.out.println("p:"+test.p);
 		System.out.println("g:"+test.g);
 		System.out.println("decMap:"+test.decMap.size());
